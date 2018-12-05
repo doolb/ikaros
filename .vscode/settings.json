@@ -1,0 +1,17 @@
+{
+    "files.associations": {
+        "system.h": "c",
+        "system.h\u0000stem.h": "c",
+        "system.h\u0000system.h": "c",
+        "system.h\u0000ystem.h": "c",
+        "config.h": "c",
+        "config.h\u0000config.h": "c",
+        "config.h\u0000nfig.h": "c",
+        "config.h\u0000onfig.h": "c",
+        "windows.h": "c",
+        "test.h": "c",
+        "dlfcn.h": "c",
+        "link.h": "c",
+        "string.h": "c"
+    }
+}
