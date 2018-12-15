@@ -1,7 +1,7 @@
 CC=clang
 IDIR =src/PCL/inc
-CFLAGS=-I $(IDIR)
-ODIR =out
+CFLAGS=-I $(IDIR) -I 3rd/rpmalloc/rpmalloc
+ODIR =.
 SDIR =src
 
 test: 

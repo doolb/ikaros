@@ -32,20 +32,20 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -70,16 +70,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)..\src\PCL\inc;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\src\PCL\inc;$(ProjectDir)..\3rd\rpmalloc\rpmalloc;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir)..\src\PCL\inc;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\src\PCL\inc;$(ProjectDir)..\3rd\rpmalloc\rpmalloc;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)..\src\PCL\inc;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\src\PCL\inc;$(ProjectDir)..\3rd\rpmalloc\rpmalloc;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir)..\src\PCL\inc;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\src\PCL\inc;$(ProjectDir)..\3rd\rpmalloc\rpmalloc;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -122,12 +122,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\PCL\config.h" />
+    <ClInclude Include="..\3rd\rpmalloc\rpmalloc\rpmalloc.h" />
+    <ClInclude Include="..\src\PCL\inc\config.h" />
+    <ClInclude Include="..\src\PCL\inc\hashtable.h" />
     <ClInclude Include="..\src\PCL\inc\Math.h" />
     <ClInclude Include="..\src\PCL\inc\System.h" />
+    <ClInclude Include="..\src\PCL\inc\log2.h" />
     <ClInclude Include="..\src\PCL\inc\vec.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\3rd\rpmalloc\rpmalloc\rpmalloc.c" />
     <ClCompile Include="..\src\PCL\Math\matrix.c" />
     <ClCompile Include="..\src\PCL\System\System.c" />
   </ItemGroup>

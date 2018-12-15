@@ -15,6 +15,26 @@
 #elif _WIN32
 #include <windows.h>
 #define getProc(p,name)		(ptr)GetProcAddress((HMODULE)p, (char*)name)
-void* getModule (char* p);
+static inline void* getModule (char* p) { return p == NULL ? GetModuleHandleA (p) : LoadLibraryA (p); }
 #endif
+
+// memory allocator
+#include <rpmalloc.h>
+#define mmalloc			rpmalloc
+#define mcalloc			rpcalloc
+#define mfree(name)		rpfree(name);name = NULL;
+
+#define mem_init		rpmalloc_initialize
+#define mem_clear		rpmalloc_finalize
+
+static inline int mralloc (void **org, size_t size) {
+	assert (org && size);
+	void* _new = rprealloc (*org, size);
+	if (_new == NULL) return 0; // allocate fail, return
+
+	// we success, set the new buffer
+	*org = _new;
+	return 1;
+}
+
 #endif

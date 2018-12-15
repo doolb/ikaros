@@ -10,12 +10,15 @@
     <Filter Include="System">
       <UniqueIdentifier>{005e3ca5-7edd-474e-b8eb-0c4dff4432e4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3rd">
+      <UniqueIdentifier>{148400c2-a8e6-4ab9-b763-ef6f990d9f0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\rpmalloc">
+      <UniqueIdentifier>{02d01d62-4abb-43ae-a30a-928893b79746}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\PCL\inc\Math.h">
-      <Filter>inc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\PCL\config.h">
       <Filter>inc</Filter>
     </ClInclude>
     <ClInclude Include="..\src\PCL\inc\System.h">
@@ -24,13 +27,26 @@
     <ClInclude Include="..\src\PCL\inc\vec.h">
       <Filter>inc</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\PCL\inc\hashtable.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\PCL\inc\log2.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\PCL\inc\config.h" />
+    <ClInclude Include="..\3rd\rpmalloc\rpmalloc\rpmalloc.h">
+      <Filter>3rd\rpmalloc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\PCL\System\System.c">
+      <Filter>System</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\PCL\Math\matrix.c">
       <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\PCL\System\System.c">
-      <Filter>System</Filter>
+    <ClCompile Include="..\3rd\rpmalloc\rpmalloc\rpmalloc.c">
+      <Filter>3rd\rpmalloc</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -19,12 +19,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\Test\hstable_test.c" />
+    <ClCompile Include="..\src\Test\list_test.c" />
+    <ClCompile Include="..\src\Test\log2_test.c" />
+    <ClCompile Include="..\src\Test\mem_test.c" />
+    <ClCompile Include="..\src\Test\misc.c" />
     <ClCompile Include="..\src\Test\test.c" />
     <ClCompile Include="..\src\Test\mat_test.c" />
+    <ClCompile Include="..\src\Test\type.c" />
     <ClCompile Include="..\src\Test\vec_test.c" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PCL.vcxproj">
+    <ProjectReference Include="PCL.vcxproj">
       <Project>{440b7e97-27fa-4bee-bc9e-706a49581ef0}</Project>
     </ProjectReference>
   </ItemGroup>
@@ -85,22 +91,22 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)..\src\PCL\inc;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\src\PCL\inc;$(ProjectDir)..\3rd\rpmalloc\rpmalloc;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)..\src\PCL\inc;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\src\PCL\inc;$(ProjectDir)..\3rd\rpmalloc\rpmalloc;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)..\src\PCL\inc;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\src\PCL\inc;$(ProjectDir)..\3rd\rpmalloc\rpmalloc;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)..\src\PCL\inc;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\src\PCL\inc;$(ProjectDir)..\3rd\rpmalloc\rpmalloc;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -121,7 +127,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
@@ -135,7 +141,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -153,7 +159,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>

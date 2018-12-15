@@ -2,10 +2,37 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="..\src\Test\test.c" />
-    <ClCompile Include="..\src\Test\mat_test.c" />
-    <ClCompile Include="..\src\Test\vec_test.c" />
+    <ClCompile Include="..\src\Test\mat_test.c">
+      <Filter>func</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Test\vec_test.c">
+      <Filter>func</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Test\misc.c">
+      <Filter>func</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Test\list_test.c">
+      <Filter>func</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Test\hstable_test.c">
+      <Filter>func</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Test\log2_test.c">
+      <Filter>func</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Test\type.c">
+      <Filter>func</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Test\mem_test.c">
+      <Filter>func</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Test\test.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="func">
+      <UniqueIdentifier>{b393af86-987b-4ba4-bae6-6aaec58d975b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
