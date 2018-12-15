@@ -1,6 +1,6 @@
 #ifndef _Math_h_
 #define _Math_h_
-#include <math.h>
+//#include <math.h>
 #include "config.h"
 
 #define M3(l,c) (l * 3 + c)
