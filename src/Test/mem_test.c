@@ -8,7 +8,7 @@ test_start (mem) {
 	test_func ("alloc mem %d", buf, 256);
 
 	snprintf (buf, 256, "this is a test %d", 123);
-	test_func ("realloc mem %d", mralloc (&buf, 512), 512);
+	test_func ("realloc mem %d", mralloc ((pvoid)&buf, 512), 512);
 
 	mfree (buf);
 

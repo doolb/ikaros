@@ -50,7 +50,7 @@ int main (int argc, char **argv) {
 			memset (buff, 0, sizeof (buff));
 			if (fgets (buff, 255, fn) > 0 && buff [0] != '\n') {
 				buff [strlen (buff) - 1] = '\0'; // remove the last \n
-				f = (test_fun) getProc (m, buff);
+				f = (_test_fun) getProc (m, buff);
 				if (f)
 					f ();
 				else
