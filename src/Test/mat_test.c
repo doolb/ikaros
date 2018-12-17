@@ -1,6 +1,6 @@
 #include "test.h"
 
-#include "Math.h"
+#include "Mat.h"
 
 test_start (mat) {
 	mat4 mat = null;

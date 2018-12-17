@@ -1,6 +1,5 @@
 #ifndef _System_h_
 #define _System_h_
-#include "config.h"
 
 #if __linux__
 
@@ -18,6 +17,8 @@
 static inline void* getModule (char* p) { return p == NULL ? GetModuleHandleA (p) : LoadLibraryA (p); }
 #endif
 
+#include "config.h"
+
 // memory allocator
 #include <rpmalloc.h>
 #define mmalloc			rpmalloc
@@ -26,6 +27,10 @@ static inline void* getModule (char* p) { return p == NULL ? GetModuleHandleA (p
 
 #define mem_init		rpmalloc_initialize
 #define mem_clear		rpmalloc_finalize
+
+#ifndef assert
+#include <assert.h>
+#endif // !assert
 
 static inline int mralloc (void **org, size_t size) {
 	assert (org && size);

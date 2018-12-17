@@ -37,6 +37,13 @@ typedef unsigned int uint;			// 32-bit
 #endif
 #endif
 
+#if !defined(bool)
+#define bool int
+#define true 1
+#define false 0
+#endif // !bool
+
+
 #define STRUCT_FUNC 1	// enable struct function support
 #define _(Type) Type##_Func
 

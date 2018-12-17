@@ -16,6 +16,9 @@
     <Filter Include="3rd\rpmalloc">
       <UniqueIdentifier>{02d01d62-4abb-43ae-a30a-928893b79746}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3rd\glad">
+      <UniqueIdentifier>{0cc4df2c-0b76-4aa4-86df-5ac19801c87e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\PCL\inc\Math.h">
@@ -37,6 +40,9 @@
     <ClInclude Include="..\3rd\rpmalloc\rpmalloc\rpmalloc.h">
       <Filter>3rd\rpmalloc</Filter>
     </ClInclude>
+    <ClInclude Include="..\3rd\glad\glad.h">
+      <Filter>3rd\glad</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\PCL\System\System.c">
@@ -47,6 +53,9 @@
     </ClCompile>
     <ClCompile Include="..\3rd\rpmalloc\rpmalloc\rpmalloc.c">
       <Filter>3rd\rpmalloc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rd\glad\glad.c">
+      <Filter>3rd\glad</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

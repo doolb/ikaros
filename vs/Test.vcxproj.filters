@@ -26,6 +26,9 @@
     <ClCompile Include="..\src\Test\mem_test.c">
       <Filter>func</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Test\glfw_test.c">
+      <Filter>func</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Test\test.h" />

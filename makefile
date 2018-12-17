@@ -1,16 +1,18 @@
 CC=clang
 IDIR =src/PCL/inc
-CFLAGS=-I $(IDIR) -I 3rd/rpmalloc/rpmalloc
-ODIR =.
+CFLAGS=-I $(IDIR) -I 3rd/rpmalloc/rpmalloc  -I 3rd -I 3rd/glfw/include -lglfw3 -lGLU -lGL -lX11 -lpthread -lXrandr -lXi -ldl -lm
+ODIR =obj
 SDIR =src
 
-3RD = 3rd/rpmalloc/rpmalloc/rpmalloc.c
+mem: dir
+	$(CC) -c 3rd/rpmalloc/rpmalloc/rpmalloc.c -o $(ODIR)/$@.o
+glad: dir
+	$(CC) -c 3rd/glad/glad.c -o $(ODIR)/$@.o
 
-_3rd:
-	$(CC) $(3RD) -o $(ODIR)/3rd.o -c
-
-test: _3rd
-	$(CC) $(SDIR)/Test/*.c 3rd.o -o $(ODIR)/bin -ldl -rdynamic -fvisibility=hidden $(CFLAGS) -g
+test: glad mem
+	$(CC) $(SDIR)/Test/*.c $(ODIR)/*.o -o bin -ldl -rdynamic -fvisibility=hidden $(CFLAGS) -g
 
 clean:
-	rm -f $(ODIR)/bin $(ODIR)/3rd.o
+	rm -f bin $(ODIR)/*
+dir:
+	mkdir -p $(ODIR)

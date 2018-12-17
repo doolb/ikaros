@@ -2,6 +2,7 @@
 #define _Math_h_
 //#include <math.h>
 #include "config.h"
+#include "vec.h"
 
 #define M3(l,c) (l * 3 + c)
 #define M4(l,c) (l * 4 + c)

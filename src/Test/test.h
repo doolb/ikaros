@@ -18,9 +18,20 @@ typedef void (*_test_fun)();
 	printf("[..] "desc"\r",##arg);			\
 	assert(block)	;						\
 	printf("[ok]\n");
+#define test_func_l(desc,block,log,arg...)	\
+	printf("[..] "desc"\r",##arg);			\
+	if(!(block)) log						\
+	assert(block)	;						\
+	printf("[ok]\n");
 #else
 #define test_func(desc,block,...)	\
-	printf("[..] "desc"\r",__VA_ARGS__);			\
+	printf("[..] "desc"\r",__VA_ARGS__);	\
+	assert(block)	;						\
+	printf("[ok]\n");
+
+#define test_func_l(desc,block, log,...)	\
+	printf("[..] "desc"\r",__VA_ARGS__);	\
+	if(!(block)) log						\
 	assert(block)	;						\
 	printf("[ok]\n");
 #endif
