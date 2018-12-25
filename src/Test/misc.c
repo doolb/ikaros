@@ -1,5 +1,6 @@
 #include "test.h"
 #include "config.h"
+#include "mappedfile.h"
 
 struct icontain {
 	int idata;
@@ -43,3 +44,16 @@ test_start (func) {
 	printf ("data: %d\n", c.data);
 }
 test_end ()
+
+
+test_start (mmap) {
+	size_t size = 0;
+	char* file = __FILE__;
+	pvoid data = map_file (file, &size);
+	test_func ("open memory map file. %s , %zu", data, file, size);
+
+	fprintf (stdout, "%s\n", data);
+
+	unmap_file (data, size);
+}
+test_end()
