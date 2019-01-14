@@ -12,6 +12,7 @@
 
 typedef unsigned long long 		ptr;
 typedef void*					pvoid;
+typedef unsigned char			byte;
 
 // define interger
 typedef long long llong;	// 64-bit
@@ -42,6 +43,13 @@ typedef unsigned int uint;			// 32-bit
 #define true 1
 #define false 0
 #endif // !bool
+
+// max,min,and clamp
+#if !defined(Max)
+#define Max(a,b) ((a)>(b) ? (a) : (b))
+#define Min(a,b) ((a)>(b) ? (b) : (a))
+#define Clamp(val, min, max) (Max((min),Min((val),(max))))
+#endif
 
 
 #define STRUCT_FUNC 1	// enable struct function support

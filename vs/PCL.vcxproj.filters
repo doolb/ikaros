@@ -19,6 +19,9 @@
     <Filter Include="3rd\glad">
       <UniqueIdentifier>{0cc4df2c-0b76-4aa4-86df-5ac19801c87e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3rd\mappedfile">
+      <UniqueIdentifier>{45c26871-3584-4362-aa1c-8e9324ecf724}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\PCL\inc\Math.h">
@@ -43,6 +46,10 @@
     <ClInclude Include="..\3rd\glad\glad.h">
       <Filter>3rd\glad</Filter>
     </ClInclude>
+    <ClInclude Include="..\3rd\mappedfile\mappedfile.h">
+      <Filter>3rd\mappedfile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\PCL\System\System.c">
@@ -56,6 +63,9 @@
     </ClCompile>
     <ClCompile Include="..\3rd\glad\glad.c">
       <Filter>3rd\glad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rd\mappedfile\mappedfile.c">
+      <Filter>3rd\mappedfile</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

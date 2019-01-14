@@ -1,6 +1,6 @@
 CC=clang
 IDIR =src/PCL/inc
-CFLAGS=-I $(IDIR) -I 3rd/rpmalloc/rpmalloc  -I 3rd -I 3rd/glfw/include -I 3rd/mappedfile -lglfw3 -lGLU -lGL -lX11 -lpthread -lXrandr -lXi -ldl -lm
+CFLAGS=-I $(IDIR) -I 3rd/rpmalloc/rpmalloc  -I 3rd -I 3rd/glfw/include -I 3rd/mappedfile -lglfw3 -lGL -lX11 -lXi -lXrandr -lXxf86vm -lXinerama -lXcursor -lrt -lm -pthread
 ODIR =obj
 SDIR =src
 

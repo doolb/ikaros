@@ -7,3 +7,6 @@
 [submodule "3rd/mappedfile"]
 	path = 3rd/mappedfile
 	url = https://github.com/d0k/mappedfile.git
+[submodule "3rd/zlib"]
+	path = 3rd/zlib
+	url = https://github.com/madler/zlib.git
