@@ -5,8 +5,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "config.h"
-
+#if __GNUC__
+#define API __attribute__((visibility("default")))
+#else
+#define API __declspec( dllexport )
+#endif
 
 typedef void (*_test_fun)();
 

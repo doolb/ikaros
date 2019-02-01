@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ikaros", "PCL.vcxproj", "{440B7E97-27FA-4BEE-BC9E-706A49581EF0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ikaros", "Ikaros.vcxproj", "{440B7E97-27FA-4BEE-BC9E-706A49581EF0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test", "Test.vcxproj", "{5A2E94EB-56DA-46E6-9704-BEA70B6CCC55}"
 EndProject

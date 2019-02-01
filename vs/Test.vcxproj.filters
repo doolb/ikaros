@@ -1,37 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\src\Test\test.c" />
-    <ClCompile Include="..\src\Test\mat_test.c">
+    <ClCompile Include="..\Test\test.c" />
+    <ClCompile Include="..\Test\func\glfw_test.c">
       <Filter>func</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Test\vec_test.c">
+    <ClCompile Include="..\Test\func\hstable_test.c">
       <Filter>func</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Test\misc.c">
+    <ClCompile Include="..\Test\func\list_test.c">
       <Filter>func</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Test\list_test.c">
+    <ClCompile Include="..\Test\func\log2_test.c">
       <Filter>func</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Test\hstable_test.c">
+    <ClCompile Include="..\Test\func\mat_test.c">
       <Filter>func</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Test\log2_test.c">
+    <ClCompile Include="..\Test\func\mem_test.c">
       <Filter>func</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Test\type.c">
+    <ClCompile Include="..\Test\func\misc.c">
       <Filter>func</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Test\mem_test.c">
+    <ClCompile Include="..\Test\func\type.c">
       <Filter>func</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Test\glfw_test.c">
+    <ClCompile Include="..\Test\func\vec_test.c">
       <Filter>func</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\Test\test.h" />
+    <ClInclude Include="..\Test\test.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="func">

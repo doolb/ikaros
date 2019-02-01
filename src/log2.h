@@ -1,5 +1,6 @@
 #ifndef LOG2_H
 #define LOG2_H
+#include "config.h"
 
 /* Integer base 2 logarithm calculation
  *

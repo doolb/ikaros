@@ -1,4 +1,5 @@
 #include "test.h"
+#include "config.h"
 
 test_start (size) {
 	printf ("size %s: %lu\n", "int", sizeof (int));

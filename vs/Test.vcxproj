@@ -19,24 +19,24 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\Test\glfw_test.c" />
-    <ClCompile Include="..\src\Test\hstable_test.c" />
-    <ClCompile Include="..\src\Test\list_test.c" />
-    <ClCompile Include="..\src\Test\log2_test.c" />
-    <ClCompile Include="..\src\Test\mem_test.c" />
-    <ClCompile Include="..\src\Test\misc.c" />
-    <ClCompile Include="..\src\Test\test.c" />
-    <ClCompile Include="..\src\Test\mat_test.c" />
-    <ClCompile Include="..\src\Test\type.c" />
-    <ClCompile Include="..\src\Test\vec_test.c" />
+    <ClCompile Include="..\Test\func\glfw_test.c" />
+    <ClCompile Include="..\Test\func\hstable_test.c" />
+    <ClCompile Include="..\Test\func\list_test.c" />
+    <ClCompile Include="..\Test\func\log2_test.c" />
+    <ClCompile Include="..\Test\func\mem_test.c" />
+    <ClCompile Include="..\Test\func\misc.c" />
+    <ClCompile Include="..\Test\test.c" />
+    <ClCompile Include="..\Test\func\mat_test.c" />
+    <ClCompile Include="..\Test\func\type.c" />
+    <ClCompile Include="..\Test\func\vec_test.c" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="PCL.vcxproj">
+    <ProjectReference Include="Ikaros.vcxproj">
       <Project>{440b7e97-27fa-4bee-bc9e-706a49581ef0}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\Test\test.h" />
+    <ClInclude Include="..\Test\test.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -92,7 +92,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)..\src\PCL\inc;$(ProjectDir)..\3rd\rpmalloc\rpmalloc;$(ProjectDir)..\3rd\glfw\include;$(ProjectDir)..\3rd;$(ProjectDir)..\3rd\mappedfile;$(ProjectDir)..\3rd\zlib;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\src\;$(ProjectDir)..\3rd\rpmalloc\rpmalloc;$(ProjectDir)..\3rd\glfw\include;$(ProjectDir)..\3rd;$(ProjectDir)..\3rd\mappedfile;$(ProjectDir)..\3rd\zlib;$(ProjectDir)..\Test\;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)\Debug;$(ProjectDir)..\3rd\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
     <TargetName>$(ProjectName)</TargetName>
@@ -104,7 +104,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)..\src\PCL\inc;$(ProjectDir)..\3rd\rpmalloc\rpmalloc;$(ProjectDir)..\3rd\glfw\include;$(ProjectDir)..\3rd;$(ProjectDir)..\3rd\mappedfile;$(ProjectDir)..\3rd\zlib;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\src\;$(ProjectDir)..\3rd\rpmalloc\rpmalloc;$(ProjectDir)..\3rd\glfw\include;$(ProjectDir)..\3rd;$(ProjectDir)..\3rd\mappedfile;$(ProjectDir)..\3rd\zlib;$(ProjectDir)..\Test\;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)\Debug;$(ProjectDir)..\3rd\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
     <TargetName>$(ProjectName)</TargetName>

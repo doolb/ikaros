@@ -1,15 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Math">
-      <UniqueIdentifier>{951abdfd-5fe2-4a2c-93ec-57ac357d7bb3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="inc">
-      <UniqueIdentifier>{6b043a79-87ad-407b-82d4-0d3cba5eb390}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="System">
-      <UniqueIdentifier>{005e3ca5-7edd-474e-b8eb-0c4dff4432e4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="3rd">
       <UniqueIdentifier>{148400c2-a8e6-4ab9-b763-ef6f990d9f0e}</UniqueIdentifier>
     </Filter>
@@ -24,22 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\PCL\inc\Math.h">
-      <Filter>inc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\PCL\inc\System.h">
-      <Filter>inc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\PCL\inc\vec.h">
-      <Filter>inc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\PCL\inc\hashtable.h">
-      <Filter>inc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\PCL\inc\log2.h">
-      <Filter>inc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\PCL\inc\config.h" />
     <ClInclude Include="..\3rd\rpmalloc\rpmalloc\rpmalloc.h">
       <Filter>3rd\rpmalloc</Filter>
     </ClInclude>
@@ -49,15 +24,17 @@
     <ClInclude Include="..\3rd\mappedfile\mappedfile.h">
       <Filter>3rd\mappedfile</Filter>
     </ClInclude>
-    <ClInclude Include="..\3rd\stb_image.h" />
+    <ClInclude Include="..\src\config.h" />
+    <ClInclude Include="..\src\hashtable.h" />
+    <ClInclude Include="..\src\System.h" />
+    <ClInclude Include="..\src\log2.h" />
+    <ClInclude Include="..\src\vec.h" />
+    <ClInclude Include="..\src\Mat.h" />
+    <ClInclude Include="..\3rd\stb_image.h">
+      <Filter>3rd</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\PCL\System\System.c">
-      <Filter>System</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\PCL\Math\matrix.c">
-      <Filter>Math</Filter>
-    </ClCompile>
     <ClCompile Include="..\3rd\rpmalloc\rpmalloc\rpmalloc.c">
       <Filter>3rd\rpmalloc</Filter>
     </ClCompile>

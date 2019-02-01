@@ -1,6 +1,7 @@
 #ifndef HASH_TABLE_H
 #define HASH_TABLE_H
 
+#include <assert.h>
 #include "config.h"
 #include "log2.h"
 
