@@ -1,6 +1,7 @@
 #pragma once
 //#include <curses.h>
 #include <stdio.h>
+#undef NDEBUG // fix assert in release build
 #include <assert.h>
 #include <stdlib.h>
 #include <string.h>

@@ -38,11 +38,11 @@
     <ClCompile Include="..\3rd\rpmalloc\rpmalloc\rpmalloc.c">
       <Filter>3rd\rpmalloc</Filter>
     </ClCompile>
-    <ClCompile Include="..\3rd\glad\glad.c">
-      <Filter>3rd\glad</Filter>
-    </ClCompile>
     <ClCompile Include="..\3rd\mappedfile\mappedfile.c">
       <Filter>3rd\mappedfile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rd\glad\glad.c">
+      <Filter>3rd\glad</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

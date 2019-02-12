@@ -29,6 +29,9 @@
     <ClCompile Include="..\Test\func\vec_test.c">
       <Filter>func</Filter>
     </ClCompile>
+    <ClCompile Include="..\Test\func\nuklear_test.c">
+      <Filter>func</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Test\test.h" />

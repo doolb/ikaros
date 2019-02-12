@@ -25,6 +25,7 @@
     <ClCompile Include="..\Test\func\log2_test.c" />
     <ClCompile Include="..\Test\func\mem_test.c" />
     <ClCompile Include="..\Test\func\misc.c" />
+    <ClCompile Include="..\Test\func\nuklear_test.c" />
     <ClCompile Include="..\Test\test.c" />
     <ClCompile Include="..\Test\func\mat_test.c" />
     <ClCompile Include="..\Test\func\type.c" />
@@ -119,7 +120,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>WIN32;GL_DEBUG;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -155,7 +156,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>WIN32;GL_DEBUG;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
