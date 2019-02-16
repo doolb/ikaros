@@ -32,6 +32,9 @@
     <ClCompile Include="..\Test\func\nuklear_test.c">
       <Filter>func</Filter>
     </ClCompile>
+    <ClCompile Include="..\Test\func\leetcode\WordLadder.c">
+      <Filter>func\leetcode</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Test\test.h" />
@@ -39,6 +42,9 @@
   <ItemGroup>
     <Filter Include="func">
       <UniqueIdentifier>{b393af86-987b-4ba4-bae6-6aaec58d975b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="func\leetcode">
+      <UniqueIdentifier>{b99d8325-f78f-4655-82a2-1e1ef796a45c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

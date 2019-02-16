@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="..\Test\func\glfw_test.c" />
     <ClCompile Include="..\Test\func\hstable_test.c" />
+    <ClCompile Include="..\Test\func\leetcode\WordLadder.c" />
     <ClCompile Include="..\Test\func\list_test.c" />
     <ClCompile Include="..\Test\func\log2_test.c" />
     <ClCompile Include="..\Test\func\mem_test.c" />
