@@ -13,7 +13,7 @@ typedef struct _HashList {
 }HashList, *pHashList;
 
 // define a HashList in you own struct
-#define Def_HashList    HashList _list_;
+#define Def_HashList    HashList _list_
 
 // init the hash-list head when define
 #define HList_Init			{0}
@@ -26,9 +26,12 @@ typedef struct _HashList {
 static inline void _hlistInit (pHashList list) {
 	list->next = NULL;
 }
+// define a hash table in struct
+#define Def_HashTable(name, bits)						\
+	HashList name[1 << (bits)]
 
 // define a hash table
-#define Def_HashTable(name, bits)					\
+#define Def_HashTable_Init(name, bits)					\
 	HashList name[1 << (bits)] = HList_Init
 
 // get the hash-table bit-size
@@ -53,7 +56,7 @@ static inline void _hlistAdd (pHashList node, pHashList head) {
 // iterate in a hash-list
 #define Hlist_for_each_entry(Type,pos,head)							\
     for(pos = List_Entry((head)->next, Type, _list_);				\
-        &pos->_list_.next != NULL;									\
+        (&pos->_list_.next) != NULL;									\
         pos = List_Entry(pos->_list_.next, Type, _list_))
 
 // iterate each entry in hash-table

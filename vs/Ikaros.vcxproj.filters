@@ -13,6 +13,12 @@
     <Filter Include="3rd\mappedfile">
       <UniqueIdentifier>{45c26871-3584-4362-aa1c-8e9324ecf724}</UniqueIdentifier>
     </Filter>
+    <Filter Include="graphic">
+      <UniqueIdentifier>{00c224bf-37d6-4f56-95bf-b88009867fbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="collect">
+      <UniqueIdentifier>{21b1c38f-c9ea-45b1-a5b0-558b9ff5d567}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\3rd\rpmalloc\rpmalloc\rpmalloc.h">
@@ -25,13 +31,30 @@
       <Filter>3rd\mappedfile</Filter>
     </ClInclude>
     <ClInclude Include="..\src\config.h" />
-    <ClInclude Include="..\src\hashtable.h" />
     <ClInclude Include="..\src\System.h" />
     <ClInclude Include="..\src\log2.h" />
     <ClInclude Include="..\src\vec.h" />
     <ClInclude Include="..\src\Mat.h" />
     <ClInclude Include="..\3rd\stb_image.h">
       <Filter>3rd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\graphic\shader.h">
+      <Filter>graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\graphic\material.h">
+      <Filter>graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\hashtable.h">
+      <Filter>collect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\list.h">
+      <Filter>collect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\graphic\texture.h">
+      <Filter>graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\graphic\mesh.h">
+      <Filter>graphic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

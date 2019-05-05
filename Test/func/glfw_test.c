@@ -9,6 +9,8 @@
 
 #include "test.h"
 #include "Mat.h"
+#include "graphic/shader.h"
+#include "graphic/texture.h"
 
 #define GLSL_VERSION "#version 330 core\n"
 GLenum err;
@@ -42,33 +44,6 @@ MessageCallback (GLenum source,
 		type, severity, message);
 }
 
-#define IMG "res/wall.jpg"
-uint texture;
-uint texture_id = 0;
-
-void loadimg () {
-	// texture
-	glGenTextures (1, &texture);
-	glBindTexture (GL_TEXTURE_2D, texture);
-	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	// load image
-	int width, height, channel;
-	stbi_set_flip_vertically_on_load (true);
-	byte *data = stbi_load (IMG, &width, &height, &channel, 0);
-	test_func ("load image file %s", data, IMG);
-
-	// setup texture data
-	glTexImage2D (GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-	err = glGetError ();  test_func_l ("load image to texture", !err, { printf ("%x\n", err); });
-	glGenerateMipmap (GL_TEXTURE_2D);
-
-	stbi_image_free (data);
-}
-
 uint vert_buff;
 uint varr_buff;
 uint vidx_buff;
@@ -90,9 +65,10 @@ uint vidx_data[] = {
 	1, 2, 3  // left-bottom
 };
 
-uint prog;
+pTexture tex;
 
 void init_buffer () {
+
 	glGenVertexArrays (1, &varr_buff);
 	glBindVertexArray (varr_buff);
 
@@ -104,92 +80,27 @@ void init_buffer () {
 	glGenBuffers (1, &vidx_buff);
 	glBindBuffer (GL_ELEMENT_ARRAY_BUFFER, vidx_buff);
 	glBufferData (GL_ELEMENT_ARRAY_BUFFER, sizeof (vidx_data), vidx_data, GL_STATIC_DRAW);
-	err = glGetError ();  test_func_l ("vertex index buff", !err, { printf ("%x\n", err); });
+	err = glGetError ();  
+	test_func_l ("vertex index buff", !err, { printf ("%x\n", err); });
 
-	glVertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, STRIP_SIZE, NULL);
-	err = glGetError ();  test_func_l ("vertex array buff", !err, { printf ("%x\n", err); });
-	glEnableVertexAttribArray (0); // this index indicate send data to vertex shader `aPos`
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, STRIP_SIZE, NULL);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, STRIP_SIZE, (void*)COL_OFFSET);
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, STRIP_SIZE, (void*)UV_OFFSET);
+	glEnableVertexAttribArray(2);
 
-	glVertexAttribPointer (1, 3, GL_FLOAT, GL_FALSE, STRIP_SIZE, (void*)COL_OFFSET);
-	err = glGetError ();  test_func_l ("vertex color buff", !err, { printf ("%x\n", err); });
-	glEnableVertexAttribArray (1); // this index indicate send data to vertex shader `aColor`
-
-	glVertexAttribPointer (2, 2, GL_FLOAT, GL_FALSE, STRIP_SIZE, (void*)UV_OFFSET);
-	err = glGetError ();  test_func_l ("vertex uv buff", !err, { printf ("%x\n", err); });
-	glEnableVertexAttribArray (2); // this index indicate send data to vertex shader `aUv`
-
-	loadimg ();
 }
 
-
-uint vert_shader;
-uint frag_shader;
-
-const char* vert_src =
-GLSL_VERSION	\
-"layout (location = 0)in vec3 aPos;		\
-layout (location = 1)in vec3 aColor;	\
-layout (location = 2)in vec2 aUv;		\
-out vec3 oColor;						\
-out vec2 oUv;							\
-	void main(){		\
-	gl_Position = vec4(aPos.x,aPos.y,aPos.z, 1.0);	\
-	oColor = aColor;	\
-	oUv = aUv;					\
-	}";
-const char* frag_src =
-GLSL_VERSION	\
-"out vec4 _frag_;	\
-uniform vec4 _color;\
-in vec3 oColor;		\
-in vec2 oUv;		\
-uniform sampler2D uTex; \
-	void main () {		\
-	_frag_ = texture(uTex, oUv);	\
-	}";
+Shader shader;
 
 void init_shader () {
-	int succ;
-	char log[512];
-	// compile vertex shader
-	vert_shader = glCreateShader (GL_VERTEX_SHADER);
-	glShaderSource (vert_shader, 1, &vert_src, NULL);
-	glCompileShader (vert_shader);
-	glGetShaderiv (vert_shader, GL_COMPILE_STATUS, &succ);
-
-	test_func_l ("compile vertex shader", succ, {
-		glGetShaderInfoLog (vert_shader, sizeof (log), NULL, log);
-		puts (log);
-		});
-
-	// compile fragment shader
-	frag_shader = glCreateShader (GL_FRAGMENT_SHADER);
-	glShaderSource (frag_shader, 1, &frag_src, NULL);
-	glCompileShader (frag_shader);
-	glGetShaderiv (frag_shader, GL_COMPILE_STATUS, &succ);
-
-	test_func_l ("compile fragment shader", succ, {
-		glGetShaderInfoLog (frag_shader,sizeof (log),NULL,log);
-		puts (log);
-		});
-
-	prog = glCreateProgram ();
-	glAttachShader (prog, vert_shader);
-	glAttachShader (prog, frag_shader);
-	glLinkProgram (prog);
-	glGetProgramiv (prog, GL_LINK_STATUS, &succ);
-
-	test_func_l ("link shader", succ, {
-		glGetProgramInfoLog (prog,sizeof (log),NULL,log);
-		puts (log);
-		});
-
-	glDeleteShader (vert_shader);
-	glDeleteShader (frag_shader);
-
+	_(Shader).Init(&shader);
+	_(Shader).ParseFile(&shader,"data/raindrop.shader");
 	// set shader sampler
-	glUseProgram (prog);
-	glUniform1i (glGetUniformLocation (prog, "uTex"), texture_id);
+	glUseProgram (shader.id);
+	tex = _(Texture).Load("res/wall.jpg");
+
 }
 
 double tm_real_last;
@@ -212,14 +123,17 @@ void draw () {
 	glClear (GL_COLOR_BUFFER_BIT);
 
 	// shader
-	float f = (sin (tm_real_now * M_PI_4) + 2) / 3;
+	double f = (sin (tm_real_now * M_PI_4) + 2) / 3;
 	printf ("%f", f);
-	glUseProgram (prog); err = glGetError (); if (err) printf ("%x\n", err);
-	glUniform4f (glGetUniformLocation (prog, "_color"), 0.3f * f, 0.5f* f, 0.7f* f, 1.0f);
+	glUseProgram(shader.id); err = glGetError(); if (err) printf("%x\n", err);
+	//glUniform4d(shaderLocation(&shader, "_color", sizeof("_color") - 1), 0.3f * f, 0.5f * f, 0.7f * f, 1.0f);
 
 	//texture
-	glActiveTexture (GL_TEXTURE0 + texture_id);
-	glBindTexture (GL_TEXTURE_2D, texture);
+	glActiveTexture(GL_TEXTURE0 + 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glActiveTexture (GL_TEXTURE0 + 1);
+	glBindTexture (GL_TEXTURE_2D, tex->id);
+	glUniform1i(shaderLocation(&shader, "uTex", sizeof("uTex")-1), 1);
 
 	// model
 	glBindVertexArray (varr_buff); err = glGetError (); if (err) printf ("%x\n", err);
@@ -259,7 +173,9 @@ test_start (glfw) {
 		glEnable (GL_DEBUG_OUTPUT);
 		glDebugMessageCallback (MessageCallback, 0);
 	}
-
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	mem_init();
 	init_shader ();
 	init_buffer ();
 	glfwSwapInterval (2);
@@ -281,7 +197,7 @@ test_start (glfw) {
 		glfwSwapBuffers (window);
 		glfwPollEvents ();
 	}
-
+	mem_clear();
 	glfwTerminate ();
 }
 test_end ()

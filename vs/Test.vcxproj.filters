@@ -32,8 +32,8 @@
     <ClCompile Include="..\Test\func\nuklear_test.c">
       <Filter>func</Filter>
     </ClCompile>
-    <ClCompile Include="..\Test\func\leetcode\WordLadder.c">
-      <Filter>func\leetcode</Filter>
+    <ClCompile Include="..\Test\func\string_test.c">
+      <Filter>func</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

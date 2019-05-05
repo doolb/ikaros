@@ -5,12 +5,12 @@
 typedef struct _mystruct {
 	int data;
 	char* sdata;
-	Def_HashList
+	Def_HashList;
 }mystruct;
 
 test_start (hstable) {
 
-	Def_HashTable (a, 3);
+	Def_HashTable_Init(a, 3);
 
 	printf ("hash_min: %d, %lu\n", 3, hash_min (3, Hash_Bits (a)));
 	printf ("hash_min: %d, %lu\n", -1, hash_min (-1, Hash_Bits (a)));
@@ -54,11 +54,23 @@ test_start (hstable) {
 
 	int bkt;
 	mystruct *cur;
-	// 	for (int bkt = 0; bkt < Array_Size (a); bkt++) {
-	// 		Hlist_for_each_entry (mystruct, cur, &a [bkt])
-	// 			printf ("data: %d @ %d %s\n", cur->data, bkt, cur->sdata);
-	// 	}
-	Hash_for_each_entry (a, bkt, mystruct, cur)
+	printf("itera manual.\n");
+	for (int bkt = 0; bkt < Array_Size(a); bkt++) {
+		for (cur = List_Entry(a[bkt].next, mystruct, _list_);
+			&(cur->_list_.next) != NULL;
+			cur = List_Entry(cur->_list_.next, mystruct, _list_)) {
+			printf("data: %d @ %d %s\n", cur->data, bkt, cur->sdata);
+		}
+	}
+
+	printf("itera with Hlist_for_each_entry.\n");
+	for (int bkt = 0; bkt < Array_Size (a); bkt++) {
+		Hlist_for_each_entry (mystruct, cur, &a [bkt])
+			printf ("data: %d @ %d %s\n", cur->data, bkt, cur->sdata);
+	}
+
+	printf("itera with Hash_for_each_entry.\n");
+	Hash_for_each_entry(a, bkt, mystruct, cur)
 		printf ("data: %d @ %d %s\n", cur->data, bkt, cur->sdata);
 }
 test_end ()

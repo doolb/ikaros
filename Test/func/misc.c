@@ -49,7 +49,7 @@ test_end ()
 test_start (mmap) {
 	size_t size = 0;
 	char* file = __FILE__;
-	pvoid data = map_file (file, &size);
+	char* data = map_file (file, &size);
 	test_func ("open memory map file. %s , %zu", data, file, size);
 
 	fprintf (stdout, "%s\n", data);

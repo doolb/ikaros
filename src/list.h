@@ -2,6 +2,7 @@
 #define LIST_H
 
 #include "config.h"
+#include <assert.h>
 
 // doubly linked list implementation
 // refer: https://kernelnewbies.org/FAQ/LinkedLists
@@ -24,6 +25,10 @@ typedef struct _ListHead {
 static inline void _listInit (pListHead list) {
 	list->next = list;
 	list->prev = list;
+}
+
+static bool isListEmpty(pListHead list) {
+	return list->next == list->prev && list->next == list;
 }
 
 // define a list head and init it

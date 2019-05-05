@@ -75,8 +75,13 @@
     <ClInclude Include="..\3rd\rpmalloc\rpmalloc\rpmalloc.h" />
     <ClInclude Include="..\3rd\stb_image.h" />
     <ClInclude Include="..\src\config.h" />
+    <ClInclude Include="..\src\graphic\material.h" />
+    <ClInclude Include="..\src\graphic\mesh.h" />
+    <ClInclude Include="..\src\graphic\texture.h" />
     <ClInclude Include="..\src\hashtable.h" />
+    <ClInclude Include="..\src\list.h" />
     <ClInclude Include="..\src\Mat.h" />
+    <ClInclude Include="..\src\graphic\shader.h" />
     <ClInclude Include="..\src\System.h" />
     <ClInclude Include="..\src\log2.h" />
     <ClInclude Include="..\src\vec.h" />

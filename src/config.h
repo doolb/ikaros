@@ -43,6 +43,13 @@ typedef unsigned int uint;			// 32-bit
 #define true 1
 #define false 0
 #endif // !bool
+#define disable -1
+
+#ifndef string
+#define string char*
+typedef wchar_t wchar;
+#define wstring wchar_t*
+#endif
 
 // max,min,and clamp
 #if !defined(Max)
@@ -54,6 +61,7 @@ typedef unsigned int uint;			// 32-bit
 
 #define STRUCT_FUNC 1	// enable struct function support
 #define _(Type) Type##_Func
+#define _Func(Type) struct Type##_Func
 
 // get the ptr of a member in type
 // #define containof(ptr,Type,member) ({                       \
@@ -65,4 +73,13 @@ typedef unsigned int uint;			// 32-bit
 // get the ptr of a member in type
 #define List_Entry(ptr,Type,member) \
     (Type *)( (char *)ptr - offsetof(Type,member) )
+
+// log output
+#define LOG_DEBUG 1
+#define LOG_WARRING 2
+#define LOG_ERROR 4
+static uint g_log = LOG_DEBUG | LOG_WARRING | LOG_ERROR;
+#define logd(...) g_log & LOG_DEBUG ? printf(__VA_ARGS__) : (void)0
+#define logw(...) g_log & LOG_WARRING ? printf(__VA_ARGS__) : (void)0
+#define loge(...) g_log & LOG_ERROR ? printf(__VA_ARGS__) : (void)0
 #endif
