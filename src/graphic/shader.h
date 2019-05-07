@@ -13,6 +13,7 @@ typedef enum _ShaderProperty_Type {
 	ShaderProperty_vec4,
 	ShaderProperty_vec3,
 	ShaderProperty_vec2,
+	ShaderProperty_float,
 }ShaderProperty_Type;
 
 typedef struct _ShaderProperty {
@@ -126,10 +127,8 @@ static inline bool loadShader_gl(pShader shader, const string vert_src, const st
 	pShaderProperty p = NULL;
 	List_for_each_entry(ShaderProperty, p, &shader->properties) {
 		p->id = glGetUniformLocation(prog, p->name);
-		if (p->id == -1) {
+		if (p->id == -1)
 			loge("find unifrom id failed : %s.\n", p->name);
-			return false;
-		}
 	}
 	return true;
 }
@@ -191,7 +190,7 @@ static inline bool loadShader_unity_properties(pShader shader, string data, int 
 			break;
 		assert(parseWord(data, data_len, &i, &l, &c, &s, &e) != EOF);
 		assert(e - s <= Shader_name_max);
-		pShaderProperty p = mmalloc(sizeof(pShaderProperty));
+		pShaderProperty p = mmalloc(sizeof(ShaderProperty));
 		assert(p);
 		listInit(p);
 		strncpy(p->name, data + s, e - s + 1);
@@ -255,6 +254,7 @@ static inline bool loadShader(pShader shader, string filename) {
 	else
 #endif
 		loge("unsupport shader! : %s\n", filename);
+	unmap_file(buff, size);
 	if(!succ) loge("loadShader failed %s\n", filename);
 	return succ;
 }

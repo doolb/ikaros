@@ -1,5 +1,4 @@
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include "graphic/glhelp.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -11,10 +10,11 @@
 #include "Mat.h"
 #include "graphic/shader.h"
 #include "graphic/texture.h"
+#include "graphic/mesh.h"
 
 #define GLSL_VERSION "#version 330 core\n"
 GLenum err;
-
+#define GL_ERR(err) err = glGetError(); if(err) printf("\n0x%x\n", err); assert(err == 0);
 void processInput (GLFWwindow *window) {
 	if (glfwGetKey (window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose (window, true);
@@ -28,79 +28,17 @@ void framebuffer_size_callback (GLFWwindow* window, int width, int height)
 	glViewport (0, 0, width, height);
 }
 
-// opengl debug message callback
-// mini version 4.3
-void GLAPIENTRY
-MessageCallback (GLenum source,
-	GLenum type,
-	GLuint id,
-	GLenum severity,
-	GLsizei length,
-	const GLchar* message,
-	const void* userParam)
-{
-	fprintf (stderr, "GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
-		(type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""),
-		type, severity, message);
-}
-
-uint vert_buff;
-uint varr_buff;
-uint vidx_buff;
-#define VERTEX_SIZE (3 * sizeof (float))
-#define COLOR_SIZE (3 * sizeof (float))
-#define COL_OFFSET (VERTEX_SIZE)
-#define UV_SIZE (2 * sizeof (float))
-#define UV_OFFSET  (VERTEX_SIZE + COLOR_SIZE)
-#define STRIP_SIZE (VERTEX_SIZE + COLOR_SIZE + UV_SIZE)
-vec3 vert_data[] = {
-	// position			// color			// uv
-	0.5f, 0.5f, 0.0f,	1.0f, 0.0f, 0.0f,	1.0f, 1.0f,		// right-top
-	0.5f, -0.5f, 0.0f,  .25f, .75f, 0.0f,	1.0f, 0.0f,		// right-bottom
-	-0.5f, -0.5f, 0.0f, 0.0f, .25f, .75f,	0.0f, 0.0f,		// left-bottom
-	-0.5f, 0.5f, 0.0f,  0.0f, 0.0f, 1.0f,	0.0f, 1.0f,		// left-top
-};
-uint vidx_data[] = {
-	0, 1, 3, // rigth-top
-	1, 2, 3  // left-bottom
-};
-
+pMesh mesh;
 pTexture tex;
-
-void init_buffer () {
-
-	glGenVertexArrays (1, &varr_buff);
-	glBindVertexArray (varr_buff);
-
-	glGenBuffers (1, &vert_buff);
-	glBindBuffer (GL_ARRAY_BUFFER, vert_buff);
-	glBufferData (GL_ARRAY_BUFFER, sizeof (vert_data), vert_data, GL_STATIC_DRAW);
-	err = glGetError ();  test_func_l ("vertex buff", !err, { printf ("%x\n", err); });
-
-	glGenBuffers (1, &vidx_buff);
-	glBindBuffer (GL_ELEMENT_ARRAY_BUFFER, vidx_buff);
-	glBufferData (GL_ELEMENT_ARRAY_BUFFER, sizeof (vidx_data), vidx_data, GL_STATIC_DRAW);
-	err = glGetError ();  
-	test_func_l ("vertex index buff", !err, { printf ("%x\n", err); });
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, STRIP_SIZE, NULL);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, STRIP_SIZE, (void*)COL_OFFSET);
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, STRIP_SIZE, (void*)UV_OFFSET);
-	glEnableVertexAttribArray(2);
-
-}
-
 Shader shader;
 
-void init_shader () {
+void init () {
 	_(Shader).Init(&shader);
 	_(Shader).ParseFile(&shader,"data/raindrop.shader");
 	// set shader sampler
 	glUseProgram (shader.id);
 	tex = _(Texture).Load("res/wall.jpg");
-
+	mesh = _(Mesh).Load("res/cube.obj");
 }
 
 double tm_real_last;
@@ -125,7 +63,7 @@ void draw () {
 	// shader
 	double f = (sin (tm_real_now * M_PI_4) + 2) / 3;
 	printf ("%f", f);
-	glUseProgram(shader.id); err = glGetError(); if (err) printf("%x\n", err);
+	glUseProgram(shader.id); GL_ERR(err);
 	//glUniform4d(shaderLocation(&shader, "_color", sizeof("_color") - 1), 0.3f * f, 0.5f * f, 0.7f * f, 1.0f);
 
 	//texture
@@ -134,11 +72,16 @@ void draw () {
 	glActiveTexture (GL_TEXTURE0 + 1);
 	glBindTexture (GL_TEXTURE_2D, tex->id);
 	glUniform1i(shaderLocation(&shader, "uTex", sizeof("uTex")-1), 1);
-
+	int _time = shaderLocation(&shader, "_Time", sizeof("_Time") - 1);
+	if(_time >= 0)
+		glUniform1f(_time, tm_real_now);
+	
 	// model
-	glBindVertexArray (varr_buff); err = glGetError (); if (err) printf ("%x\n", err);
-	glDrawElements (GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0); err = glGetError (); if (err) printf ("%x\n", err);
-	glBindVertexArray (0); err = glGetError (); if (err) printf ("%x\n", err);
+	glBindVertexArray (mesh->id); GL_ERR(err);
+	glPointSize(10);
+	glLineWidth(10);
+	glDrawElements (GL_POINTS, mesh->numTriangles, GL_UNSIGNED_INT, 0);GL_ERR(err);
+	glBindVertexArray (0); GL_ERR(err);
 
 }
 
@@ -147,16 +90,10 @@ test_start (glfw) {
 
 	/* Initialize the library */
 	test_func ("init glfw", glfwInit ());
-#if GL_DEBUG
-	glfwWindowHint (GLFW_CONTEXT_VERSION_MAJOR, 4);
-	glfwWindowHint (GLFW_CONTEXT_VERSION_MINOR, 5);
-#else
 	glfwWindowHint (GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint (GLFW_CONTEXT_VERSION_MINOR, 3);
-#endif
 	glfwWindowHint (GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-
 
 	/* Create a windowed mode window and its OpenGL context */
 	window = glfwCreateWindow (640, 480, "Hello World", NULL, NULL);
@@ -168,16 +105,12 @@ test_start (glfw) {
 	// load gl must after make glcontext
 	test_func ("glad load gl", gladLoadGLLoader ((GLADloadproc)glfwGetProcAddress));
 
-	if (GLAD_GL_VERSION_4_3) {
-		// During init, enable debug output
-		glEnable (GL_DEBUG_OUTPUT);
-		glDebugMessageCallback (MessageCallback, 0);
-	}
+	printf(glGetString(GL_VERSION));
+	printGLVersion();
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	mem_init();
-	init_shader ();
-	init_buffer ();
+	init ();
 	glfwSwapInterval (2);
 
 	time ();

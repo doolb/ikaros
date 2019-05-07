@@ -10,3 +10,6 @@
 [submodule "3rd/zlib"]
 	path = 3rd/zlib
 	url = https://github.com/madler/zlib.git
+[submodule "3rd/tinyobjloader-c"]
+	path = 3rd/tinyobjloader-c
+	url = https://github.com/syoyo/tinyobjloader-c.git

@@ -1,0 +1,30 @@
+#ifndef GLHELP_H
+#define GLHELP_H
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+#include <stdio.h>
+
+static inline void printGLVersion() {
+#define GLV(v) if(v) printf(#v"\n")
+	GLV(GLAD_GL_VERSION_1_0);
+	GLV(GLAD_GL_VERSION_1_1);
+	GLV(GLAD_GL_VERSION_1_2);
+	GLV(GLAD_GL_VERSION_1_3);
+	GLV(GLAD_GL_VERSION_1_4);
+	GLV(GLAD_GL_VERSION_1_5);
+	GLV(GLAD_GL_VERSION_2_0);
+	GLV(GLAD_GL_VERSION_2_1);
+	GLV(GLAD_GL_VERSION_3_0);
+	GLV(GLAD_GL_VERSION_3_1);
+	GLV(GLAD_GL_VERSION_3_2);
+	GLV(GLAD_GL_VERSION_3_3);
+	GLV(GLAD_GL_VERSION_4_0);
+	GLV(GLAD_GL_VERSION_4_1);
+	GLV(GLAD_GL_VERSION_4_2);
+	GLV(GLAD_GL_VERSION_4_3);
+	GLV(GLAD_GL_VERSION_4_4);
+	GLV(GLAD_GL_VERSION_4_5);
+#undef GLV
+}
+
+#endif // !GLHELP_H

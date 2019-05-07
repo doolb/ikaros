@@ -118,12 +118,12 @@ static inline ulong hash_64 (ulong val, uint bits)
 	return hash >> (64 - bits);
 }
 
-#define hash_str	hash_djb2
+#define hash_str	hash_djb2_s
 #define hash_str_bit(str, max_len, bits) (hash_str(str, max_len) & pow2_ff(bits))
 
 // hash for string, also for any object
 // refer:http://www.cse.yorku.ca/~oz/hash.html
-static inline unsigned long hash_djb2 (char *str, int max_len) {
+static inline unsigned long hash_djb2_s(char *str, int max_len) {
 	unsigned long hash = 5381;
 	for (int i = 0; i < max_len && str [i]; i++)
 		hash = ((hash << 5) + hash) + str [i];

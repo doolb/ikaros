@@ -19,6 +19,9 @@
     <Filter Include="collect">
       <UniqueIdentifier>{21b1c38f-c9ea-45b1-a5b0-558b9ff5d567}</UniqueIdentifier>
     </Filter>
+    <Filter Include="platform">
+      <UniqueIdentifier>{ec75efe0-d186-43fe-92d0-85cd2cbe50da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\3rd\rpmalloc\rpmalloc\rpmalloc.h">
@@ -55,6 +58,18 @@
     </ClInclude>
     <ClInclude Include="..\src\graphic\mesh.h">
       <Filter>graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\tinyobjloader-c\tinyobj_loader_c.h">
+      <Filter>3rd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\graphic\tinyobj.h">
+      <Filter>graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\graphic\glhelp.h">
+      <Filter>graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\platform\display.h">
+      <Filter>platform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
