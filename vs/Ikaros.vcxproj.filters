@@ -22,6 +22,12 @@
     <Filter Include="platform">
       <UniqueIdentifier>{ec75efe0-d186-43fe-92d0-85cd2cbe50da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{781beb59-a28e-413a-9251-f4d47b6773e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Collections">
+      <UniqueIdentifier>{fa715ef9-63c8-4a63-bec1-3a902d0bc75a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\3rd\rpmalloc\rpmalloc\rpmalloc.h">
@@ -70,6 +76,12 @@
     </ClInclude>
     <ClInclude Include="..\src\platform\display.h">
       <Filter>platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\System\Collections\HashHelpers.h">
+      <Filter>System\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\System\Collections.h">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -10,6 +10,7 @@
 #define API __attribute__((visibility("default")))
 #else
 #define API __declspec( dllexport )
+#include <windows.h>
 #endif
 
 typedef void (*_test_fun)();

@@ -1,7 +1,19 @@
 #include "test.h"
-#include "System.h"
+#include <time.h>
 
 #define FUNC_TEST "_test"
+
+static run_test(_test_fun f) {
+#if !TEST_TIME			
+	clock_t start, end;
+	start = clock();
+	f();
+	end = clock();
+	printf("cpu time: %ld ms ", end - start);
+#else					
+	f();
+#endif					
+}
 
 char buff [256] = { 0 };
 
@@ -13,7 +25,7 @@ int main (int argc, char **argv) {
 	printf ("Args: [func=%s] [dll=%s]\n", name == NULL ? "(all)" : name,
 		file == NULL ? argv [0] : file);
 
-	void *m = getModule (file);
+	void *m = file == NULL ? GetModuleHandleA(NULL) : LoadLibraryA(file);
 	if (!m) {
 		printf ("Load file failed. %s", file);
 		return -1;
@@ -22,9 +34,9 @@ int main (int argc, char **argv) {
 	if (name != NULL) {
 		// run specify
 		snprintf (buff, 255, "%s" FUNC_TEST, name); // insert a "_test"
-		f = (_test_fun) getProc (m, buff);
+		f = (_test_fun)GetProcAddress(m, buff);
 		if (f)
-			f ();
+			run_test(f);
 		else
 			printf ("No test function found!\n");
 	}
@@ -32,10 +44,10 @@ int main (int argc, char **argv) {
 #if _WIN32
 		int i = 1;
 		do {
-			f = (_test_fun) getProc (m, i);
+			f = (_test_fun)GetProcAddress(m, i);
 			if (f) {
 				printf ("%d ", i++);
-				f ();
+				run_test(f);
 			}
 			putchar ('\n');
 		} while (f != NULL);
@@ -50,9 +62,9 @@ int main (int argc, char **argv) {
 			memset (buff, 0, sizeof (buff));
 			if (fgets (buff, 255, fn) > 0 && buff [0] != '\n') {
 				buff [strlen (buff) - 1] = '\0'; // remove the last \n
-				f = (_test_fun) getProc (m, buff);
+				f = (_test_fun)dlsym(m, buff);
 				if (f)
-					f ();
+					run_test(f);
 				else
 					printf ("%s: no found!\n", buff);
 				putchar ('\n');

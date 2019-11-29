@@ -24,29 +24,29 @@ static inline void* getModule (char* p) { return p == NULL ? GetModuleHandleA (p
 #include "config.h"
 
 // memory allocator
+#ifdef USE_RPMALLOC
 #include <rpmalloc.h>
 #define mmalloc			rpmalloc
 #define mcalloc			rpcalloc
+#define mralloc			rprealloc
 #define mfree(name)		rpfree(name);name = NULL;
 
 #define mem_init		rpmalloc_initialize
 #define mem_clear		rpmalloc_finalize
+#else
+#define mmalloc			malloc
+#define mcalloc			calloc
+#define mralloc			realloc
+#define mfree(name)		free(name);name = NULL;
 
+#define mem_init()		
+#define mem_clear()		
+#endif
 #include "mappedfile.h"
 
 #ifndef assert
 #include <assert.h>
 #endif // !assert
-
-static inline int mralloc (void **org, size_t size) {
-	assert (org && size);
-	void* _new = rprealloc (*org, size);
-	if (_new == NULL) return 0; // allocate fail, return
-
-	// we success, set the new buffer
-	*org = _new;
-	return 1;
-}
 
 #define idx		(*_idx)
 #define line	(*_line)
@@ -179,12 +179,53 @@ static inline int parseCfgString(char* buff, int buff_len, int *_idx, int *_line
 #undef start
 #undef end
 
+// time
+#ifdef __CYGWIN32__
+double RealElapsedTime(void) { // returns 0 seconds first time called
+	static struct timeval t0;
+	struct timeval tv;
+	gettimeofday(&tv, 0);
+	if (!t0.tv_sec)
+		t0 = tv;
+	return tv.tv_sec - t0.tv_sec + (tv.tv_usec - t0.tv_usec) / 1000000.;
+}
+#else
+#include <windows.h>
+double RealElapsedTime(void) { // granularity about 50 microsecs on my machine
+	static LARGE_INTEGER freq, start;
+	LARGE_INTEGER count;
+	if (!QueryPerformanceCounter(&count))
+		perror("QueryPerformanceCounter");
+	if (!freq.QuadPart) { // one time initialization
+		if (!QueryPerformanceFrequency(&freq))
+			perror("QueryPerformanceFrequency");
+		start = count;
+	}
+	return (double)(count.QuadPart - start.QuadPart) / freq.QuadPart;
+}
+#endif
+
+// log
+#ifndef No_Debug
+#define _debug_(fmt, ...)		printf("%s,%d,%s," ## fmt ## "\n", __FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+#else
+#define _debug_(fmt, ...)		
+#endif
+#define _info_(fmt, ...)		printf("%s,%d,%s," ## fmt ## "\n", __FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+
+// status 
+typedef enum _Status
+{
+	Status_OK,
+	Status_Memory_Overflow,
+	Status_Paramter_Error,
+}Status;
 
 // class define
 #define IDispose(T)				\
 	T*		(*New)();			\
 	void	(*Del)(T* *shader);	\
-	void	(*Init)(T*)
+	int		(*Init)(T*)
 #define IDispose_Def(New, Del, Init)	New,Del,Init
 
 #define IParse(T)				\
@@ -195,4 +236,23 @@ static inline int parseCfgString(char* buff, int buff_len, int *_idx, int *_line
 
 #define ILoad(T)				\
 	T*		(*Load)(string filename)
+
+#define ITable(TTable, TValue)	\
+	bool	(*Add)(TTable *table, void* key, int key_bit, TValue *value);	\
+	void*	(*Get)(TTable *table, void* key, int key_bit)
+#define ITable_Def(Add, Get)			Add,Get
+
+#define IArray(T)				\
+	int		count;				\
+	int		max;				\
+	T*		items;
+#define IArray_New(arr)			\
+	(arr)->count = 0;			\
+	(arr)->max = 0;				\
+	(arr)->items = NULL;
+#define IArray_Del(arr, func_free)		\
+	(arr)->count = 0;					\
+	(arr)->max = 0;						\
+	if((arr)->items != NULL) func_free  \
+	(arr)->items = NULL;
 #endif

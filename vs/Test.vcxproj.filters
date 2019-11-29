@@ -2,9 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="..\Test\test.c" />
-    <ClCompile Include="..\Test\func\glfw_test.c">
-      <Filter>func</Filter>
-    </ClCompile>
     <ClCompile Include="..\Test\func\hstable_test.c">
       <Filter>func</Filter>
     </ClCompile>
@@ -29,10 +26,13 @@
     <ClCompile Include="..\Test\func\vec_test.c">
       <Filter>func</Filter>
     </ClCompile>
-    <ClCompile Include="..\Test\func\nuklear_test.c">
+    <ClCompile Include="..\Test\func\string_test.c">
       <Filter>func</Filter>
     </ClCompile>
-    <ClCompile Include="..\Test\func\string_test.c">
+    <ClCompile Include="..\Test\func\glfw_test.c">
+      <Filter>func</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Test\func\nuklear_test.c">
       <Filter>func</Filter>
     </ClCompile>
   </ItemGroup>
