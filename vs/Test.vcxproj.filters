@@ -35,6 +35,12 @@
     <ClCompile Include="..\Test\func\nuklear_test.c">
       <Filter>func</Filter>
     </ClCompile>
+    <ClCompile Include="..\Test\func\display_test.c">
+      <Filter>func</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Test\func\hdi.c">
+      <Filter>func</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Test\test.h" />

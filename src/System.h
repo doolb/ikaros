@@ -180,7 +180,7 @@ static inline int parseCfgString(char* buff, int buff_len, int *_idx, int *_line
 #undef end
 
 // time
-#ifdef __CYGWIN32__
+#ifndef _WIN32
 double RealElapsedTime(void) { // returns 0 seconds first time called
 	static struct timeval t0;
 	struct timeval tv;
@@ -191,7 +191,7 @@ double RealElapsedTime(void) { // returns 0 seconds first time called
 }
 #else
 #include <windows.h>
-double RealElapsedTime(void) { // granularity about 50 microsecs on my machine
+static double RealElapsedTime(void) { // granularity about 50 microsecs on my machine
 	static LARGE_INTEGER freq, start;
 	LARGE_INTEGER count;
 	if (!QueryPerformanceCounter(&count))

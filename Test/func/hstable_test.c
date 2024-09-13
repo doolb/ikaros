@@ -91,7 +91,7 @@ test_start (hstable) {
 		});
  		
 
-	int num = 100000000;
+	int num = 10000000;
 	size_t size = num * sizeof(mystruct);
 	size_t k = size / 1024;
 	size_t m = k / 1024;
@@ -134,13 +134,6 @@ test_start (hstable) {
 
 	RealElapsedTime();
 	LARGE_INTEGER  large_interger;
-	double dff;
-	__int64  c1, c2;
-	QueryPerformanceFrequency(&large_interger);
-	dff = large_interger.QuadPart;
-	QueryPerformanceCounter(&large_interger);
-	c1 = large_interger.QuadPart;
-
 	for (int i = 0; i < num; i++) {
 		//void* ptr = _(HashTable).Get(&a, i, 0);
 		void* ptr = hashGet(&a, (void*)i, 0);
@@ -149,13 +142,6 @@ test_start (hstable) {
 			;// printf("data: %d @ %d %s\n", cur->data, bkt, cur->sdata);
 		}
 	}
-
-	QueryPerformanceCounter(&large_interger);
-	c2 = large_interger.QuadPart;
-	printf("本机高精度计时器频率%lf\n", dff);
-	printf("第一次计时器值%I64d 第二次计时器值%I64d 计时器差%I64d\n", c1, c2, c2 - c1);
-	printf("计时%lf毫秒\n", (c2 - c1) * 1000 / dff);
-
 	printf("access cpu time: %lf ms \n", RealElapsedTime());
 
    	mem_clear();

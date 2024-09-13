@@ -1,7 +1,7 @@
 #pragma once
 #ifndef _vec_h_
 #define _vec_h_
-#include <math.h>
+//#include <math.h>
 #include "config.h"
 
 #define _V(n)		struct { mfloat _v [n]; }		// define a n vector struct
@@ -10,6 +10,7 @@
 typedef struct {
 	union {
 		mfloat v [4];
+		struct { mfloat posX, posY, height, width; };
 		struct { mfloat x, y, z, w; };
 		struct { mfloat r, g, b, a; };
 		struct { mfloat lb, lg, lr, la; };
@@ -46,6 +47,7 @@ typedef struct {
 typedef struct {
 	union {
 		mint v [4];
+		struct { mint posX, posY, height, width; };
 		struct { mint x, y, z, w; };
 		struct { mint r, g, b, a; };
 		struct { mint lb, lg, lr, la; };

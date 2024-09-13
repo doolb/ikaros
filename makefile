@@ -1,4 +1,4 @@
-CC=clang
+CC=gcc
 IDIR =src
 CFLAGS=-I $(IDIR) -I 3rd/rpmalloc/rpmalloc  -I 3rd -I 3rd/glfw/include -I 3rd/mappedfile -lglfw3 -lGL -lX11 -lXi -lXrandr -lXxf86vm -lXinerama -lXcursor -lrt -lm -pthread
 ODIR =obj
